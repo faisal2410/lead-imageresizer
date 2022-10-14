@@ -1,15 +1,14 @@
-
 const express = require('express');
 const router = express.Router();
-const { uploader } = require("../middlewares/uploader")
-const { getImageDimensions }=require("../controllers/imageresize")
-
-
+const { imageDimensions,imageResize,imageCompressor }=require("../controllers/imageresize")
 
 router.get("/", (req, res) => {
-    res.status(200).json({status:"success",message:"Welcome to image resizer app"})
+    res.status(200).json({status:"success",message:"Welcome to image re-sizer app"})
 })
+router.post("/image-upload",imageDimensions);
+router.post("/resize/:path",imageResize);
+router.post("/compress/uploads",imageCompressor)
 
-router.post("/image-dimension", uploader, getImageDimensions)
+
 
 module.exports = router;
